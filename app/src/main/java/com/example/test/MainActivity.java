@@ -88,6 +88,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void playSequence(){
+        if(mainThread.isAlive())
+            return;
         play = true;
         mainThread = new Thread(() -> {
             while (play){
