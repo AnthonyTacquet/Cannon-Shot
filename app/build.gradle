@@ -9,8 +9,8 @@ android {
         applicationId "com.antwaan.cannonshot"
         minSdk 26 //21
         targetSdk 32
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
