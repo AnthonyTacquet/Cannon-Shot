@@ -55,10 +55,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (view.getId() == R.id.StartButton){
             try {
                 check();
+                playSequence();
             } catch (Exception e) {
-                return;
+                setErrorLabel(e.getMessage());
             }
-            playSequence();
         }
         if (view.getId() == R.id.StopButton){
             play = false;
@@ -67,6 +67,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void check() throws Exception{
+        if (TimerInput.getText().toString().length() <= 0){
+            throw new Exception("Fill in the required fields!");
+        }
+        if (NumberInput.getText().toString().length() <= 0){
+            throw new Exception("Fill in the required fields!");
+        }
         try {
             System.out.println(TimerInput.getText().toString());
             Time = LocalTime.parse(TimerInput.getText().toString());
