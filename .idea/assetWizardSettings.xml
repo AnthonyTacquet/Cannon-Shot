@@ -79,8 +79,8 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="$USER_HOME$/Pictures/CannonShot/APP.png" />
-                                                <entry key="scalingPercent" value="87" />
+                                                <entry key="imagePath" value="$USER_HOME$/Pictures/CannonShot/appicon.png" />
+                                                <entry key="scalingPercent" value="105" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
                                             </option>

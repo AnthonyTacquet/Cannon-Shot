@@ -53,12 +53,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.StartButton){
+            boolean ok = true;
+            setErrorLabel("");
             try {
                 check();
-                playSequence();
-            } catch (Exception e) {
+            } catch (Throwable e) {
+                ok = false;
                 setErrorLabel(e.getMessage());
             }
+            if (ok)
+                playSequence();
         }
         if (view.getId() == R.id.StopButton){
             play = false;
@@ -66,26 +70,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void check() throws Exception{
-        if (TimerInput.getText().toString().length() <= 0){
-            throw new Exception("Fill in the required fields!");
-        }
-        if (NumberInput.getText().toString().length() <= 0){
-            throw new Exception("Fill in the required fields!");
-        }
+    public void check() throws Throwable {
+        if (TimerInput.getText().toString().length() != 8)
+            throw new Throwable("Fill in the required fields correctly!");
+        if (NumberInput.getText().toString().length() != 1)
+            throw new Throwable("Fill in the required fields correctly!");
+        if (NumberInput.getText().toString().contains(":") || NumberInput.getText().toString().contains(","))
+            throw new Throwable("Fill in the required fields correctly!");
+        if (TimerInput.getText().toString().contains(",") || TimerInput.getText().toString().charAt(2) != ':' || TimerInput.getText().toString().charAt(5) != ':')
+            throw new Throwable("Fill in the required fields correctly!");
         try {
             System.out.println(TimerInput.getText().toString());
             Time = LocalTime.parse(TimerInput.getText().toString());
-        } catch (Exception exception){
-            setErrorLabel("Check if all fields are filled in correctly");
+        } catch (Throwable exception){
+            throw new Throwable("Check if all fields are filled in correctly");
         }
     }
 
     public void setErrorLabel(String text){
         runOnUiThread(() -> {
             ErrorText.setText(text);
-            ErrorText.setTextColor(Color.red(1));
         });
+
     }
 
     public void setTimerField(String text){
